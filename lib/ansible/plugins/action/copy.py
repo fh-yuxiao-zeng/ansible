@@ -532,7 +532,7 @@ class ActionModule(ActionBase):
             paths = os.path.split(source_rel)
             dir_path = ''
             for dir_component in paths:
-                os.path.join(dir_path, dir_component)
+                dir_path = os.path.join(dir_path, dir_component)
                 implicit_directories.add(dir_path)
             if 'diff' in result and not result['diff']:
                 del result['diff']
