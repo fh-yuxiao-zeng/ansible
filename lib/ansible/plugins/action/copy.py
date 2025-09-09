@@ -484,8 +484,10 @@ class ActionModule(ActionBase):
         # A list of source file tuples (full_path, relative_path) which will try to copy to the destination
         source_files = {'files': [], 'directories': [], 'symlinks': []}
 
+        source_is_dir = os.path.isdir(to_bytes(source, errors='surrogate_or_strict'))
+
         # If source is a directory populate our list else source is a file and translate it to a tuple.
-        if os.path.isdir(to_bytes(source, errors='surrogate_or_strict')):
+        if source_is_dir:
             # Get a list of the files we want to replicate on the remote side
             source_files = _walk_dirs(source, local_follow=local_follow,
                                       trailing_slash_detector=self._connection._shell.path_has_trailing_slash)
@@ -588,7 +590,7 @@ class ActionModule(ActionBase):
 
             changed = changed or module_return.get('changed', False)
 
-        if module_executed and len(source_files['files']) == 1:
+        if module_executed and not source_is_dir:
             result.update(module_return)
 
             # the file module returns the file path as 'path', but
