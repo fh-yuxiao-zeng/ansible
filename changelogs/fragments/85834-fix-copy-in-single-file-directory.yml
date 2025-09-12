@@ -1,0 +1,2 @@
+bugfixes:
+  - "copy - when a single-file directories was specified as the source, ``changed`` was false even when the source was actually copied. Fix now makes sure ``changed`` is true in this case. Fix also changes the return value to be consistent with other directory copy cases. (https://github.com/ansible/ansible/issues/85833)"
