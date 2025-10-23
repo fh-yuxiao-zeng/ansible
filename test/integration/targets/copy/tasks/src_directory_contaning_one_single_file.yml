@@ -24,4 +24,4 @@
     that:
       - 'stat_file.stat.exists'
       - 'copy_result.changed'
-      - 'copy_result.dest == remote_dir + "/"'
+      - 'copy_result.dest == remote_dir + "/subdir_with_single_file/file.txt"'
